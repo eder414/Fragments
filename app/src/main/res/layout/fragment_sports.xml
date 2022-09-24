@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:paddingTop="20dp"
+android:background="#FFC107"
+android:orientation="vertical"
+tools:context=".SportsFragment">
+
+<TextView
+    android:id="@+id/textView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Sport Fragment"
+    android:textAlignment="center"
+    android:textSize="34sp"
+    android:textStyle="bold" />
+<EditText
+    android:layout_marginTop="15dp"
+    android:id="@+id/editTextSport"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"></EditText>
+<Button
+    android:text="Change"
+    android:id="@+id/changeNews"
+    android:layout_gravity="center"
+    android:layout_width="wrap_content"
+    android:layout_marginTop="30dp"
+    android:layout_height="wrap_content"></Button>
+</LinearLayout>
