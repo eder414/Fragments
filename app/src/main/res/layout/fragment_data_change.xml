@@ -6,9 +6,10 @@
     android:background="#F44336"
     tools:context=".DataChangeFragment">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="center">
 
         <EditText
@@ -18,8 +19,18 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:text="poller"
-            android:textSize="20dp"></EditText>
+            android:textSize="20dp"
+            android:textAlignment="center"></EditText>
 
-    </RelativeLayout>
+        <Button
+            android:id="@+id/btnChangeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Change Text"
+            android:textSize="20dp"
+            android:layout_marginTop="20pt"
+            ></Button>
+
+    </LinearLayout>
 
 </FrameLayout>

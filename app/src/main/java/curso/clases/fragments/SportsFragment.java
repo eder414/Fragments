@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import curso.clases.fragments.Interface.FragmentAListener;
+import curso.clases.fragments.Interface.IChangeText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link SportsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SportsFragment extends Fragment {
+public class SportsFragment extends Fragment implements IChangeText {
     private EditText editTextSport;
-    private SportsFragment.FragmentAListener listener;
+    private FragmentAListener listener;
     Button btnChange;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -78,15 +81,12 @@ public class SportsFragment extends Fragment {
 
         return view;
     }
-    public interface FragmentAListener{
-        void onInputASent(CharSequence input);
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof SportsFragment.FragmentAListener){
-            listener = (SportsFragment.FragmentAListener) context;
+        if(context instanceof FragmentAListener){
+            listener = (FragmentAListener) context;
         }else{
             throw  new RuntimeException(context.toString() + "must implement FragmentAListener");
         }
@@ -99,5 +99,10 @@ public class SportsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public void ChangeText(String texto) {
+        editTextSport.setText(texto);
     }
 }

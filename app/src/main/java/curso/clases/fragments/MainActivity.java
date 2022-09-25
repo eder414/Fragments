@@ -8,10 +8,14 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import curso.clases.fragments.Interface.FragmentAListener;
+import curso.clases.fragments.Interface.IChangeText;
 import curso.clases.fragments.models.Fragments;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, NewsFragment.FragmentAListener, SportsFragment.FragmentAListener, ScienceFragment.FragmentAListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener,  FragmentAListener,
+                            DataChangeFragment.FragmentAListener{
     Button btnNews,btnSport,btnScience;
     FragmentManager fragmentManager;
     /*NewsFragment newsFragment;
@@ -34,6 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         fragments = new Fragments(new NewsFragment() , new SportsFragment(),new  ScienceFragment() , new DataChangeFragment());
+        fragments.getDataChangeFragment().setFragment(fragments.getNewsFragment());
         /*changeFragment = new DataChangeFragment();
 
         sport = new SportsFragment();
@@ -69,8 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             break;
         }
     }
-    public <T> void ChangeFragment(T fragment1){
-
+    public <T extends IChangeText> void ChangeFragment(T fragment1){
+        //fragments.setDataChangeFragment(new DataChangeFragment(fragment1));
+        fragments.getDataChangeFragment().setFragment(fragment1);
         fragmentManager.beginTransaction()
                         .replace(R.id.fragmentContainerView, (Fragment) fragment1,null)
                         .replace(R.id.fragmentModify,fragments.getDataChangeFragment(),null)
@@ -81,7 +87,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    public <T> void onInputASent(CharSequence input,T fragmento) {
+        Toast.makeText(MainActivity.this,
+                        fragments.getDataChangeFragment().fragment.getClass().toString(),
+                        Toast.LENGTH_SHORT).show();
+        CambiarByInterface(fragments.getDataChangeFragment().fragment,input.toString());
+    }
+
+    @Override
     public void onInputASent(CharSequence input) {
         fragments.getDataChangeFragment().ChangeText(input);
+    }
+
+    public <T extends IChangeText> void CambiarByInterface(T instancia,String texto){
+        instancia.ChangeText(texto);
     }
 }

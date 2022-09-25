@@ -12,14 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import curso.clases.fragments.Interface.FragmentAListener;
+import curso.clases.fragments.Interface.IChangeText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ScienceFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ScienceFragment extends Fragment {
+public class ScienceFragment extends Fragment implements IChangeText {
     private EditText editTextScience;
-    private ScienceFragment.FragmentAListener listener;
+    private FragmentAListener listener;
     Button btnChange;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,8 +85,8 @@ public class ScienceFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if(context instanceof ScienceFragment.FragmentAListener){
-            listener = (ScienceFragment.FragmentAListener) context;
+        if(context instanceof FragmentAListener){
+            listener = (FragmentAListener) context;
         }else{
             throw  new RuntimeException(context.toString() + "must implement FragmentAListener");
         }
@@ -98,7 +101,8 @@ public class ScienceFragment extends Fragment {
         listener = null;
     }
 
-    public interface FragmentAListener{
-        void onInputASent(CharSequence input);
+    @Override
+    public void ChangeText(String texto) {
+        editTextScience.setText(texto);
     }
 }

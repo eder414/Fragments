@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import curso.clases.fragments.Interface.FragmentAListener;
+import curso.clases.fragments.Interface.IChangeText;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link NewsFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewsFragment extends Fragment {
+public class NewsFragment extends Fragment implements IChangeText {
     private EditText editTextNews;
     private FragmentAListener listener;
     Button btnChange;
@@ -71,9 +74,7 @@ public class NewsFragment extends Fragment {
 
         return view;
     }
-    public interface FragmentAListener{
-        void onInputASent(CharSequence input);
-    }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -92,5 +93,10 @@ public class NewsFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         listener = null;
+    }
+
+    @Override
+    public void ChangeText(String texto) {
+        editTextNews.setText(texto);
     }
 }
